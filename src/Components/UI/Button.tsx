@@ -11,7 +11,7 @@ type ButtonProps = {
 };
 
 function Button({ text, className, href, disabled, loading, onClick }: ButtonProps) {
-  const baseClass = `bg-[#4772FF] shadow-lg px-4 py-2 bg-[#4772FF] rounded-xl flex items-center justify-center gap-2 transition 
+  const baseClass = `px-4 py-3 bg-[#4772FF] btn-shadow rounded-full flex items-center justify-center gap-2 transition 
      ${disabled || loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} ${className}`;
 
   const content = (
