@@ -38,7 +38,7 @@ function LoginPage () {
 
     return (
         <div className="flex flex-col-reverse lg:flex-row xl:flex-row w-full h-full items-center justify-between bg-white rounded-xl border border-[#A5A5A5]">
-            <div className="xl:w-[55%] w-full flex flex-col items-center justify-center mb-10 gap-7 md:gap-8 md:mb-11 lg:gap-10 xl:gap-12">
+            <div className="w-full flex flex-col md:gap-8 md:mb-11 lg:gap-10 xl:w-[55%] xl:gap-12 items-center justify-center mb-10 gap-7">
                 <Image
                     width={1000}
                     height={1000}
@@ -56,12 +56,12 @@ function LoginPage () {
                 </div>
                 <Button
                     text={loading ? "Loading..." : "Login"}
-                    className="w-40 md:w-52 lg:w-56 xl:w-80 text-[13px] lg:text-[14px] text-white font-[600]"
+                    className="w-40 text-[13px] md:w-52 lg:w-56 lg:text-[14px] xl:w-80 text-white font-[600]"
                     onClick={handleLogin}
                     disabled={loading}
                 />
             </div>
-            <div className="xl:w-[45%] w-full relative">
+            <div className="w-full xl:w-[45%] relative">
                 <Image
                     width={1000}
                     height={1000}
