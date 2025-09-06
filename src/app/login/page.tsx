@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Input from "@/Components/UI/Input";
-import Button from "@/Components/UI/Button";
+import { login } from "@/services/authService";
+import Input from "@/components/UI/Input";
+import Button from "@/components/UI/Button";
 import Image from "next/image";
 import axios from "axios";
 
@@ -11,6 +12,7 @@ const iranPhoneRegex = /^(?:\+98|0098|0)?9\d{9}$/;
 function LoginPage () {
     const [mobileNumber, setMobileNumber] = useState("");
     const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
     const router = useRouter();
 
     const handleLogin = async () => {
@@ -21,16 +23,19 @@ function LoginPage () {
 
         try {
             setLoading(true);
-            const response = await axios.get("https://randomuser.me/api/?results=1&nat=us");
-            const userData = response.data;
+            setErrorMsg("");
 
-            // Saving data in localStorage
-            localStorage.setItem("userData", JSON.stringify(userData));
+            await login(mobileNumber);
 
-            // Redirect to dashboard page
             router.push("/dashboard");
-        } catch (error) {
-            console.error("Error fetching user data:", error);
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                setErrorMsg(error.response?.data?.message || error.message);
+            } else if (error instanceof Error) {
+                setErrorMsg(error.message);
+            } else {
+                setErrorMsg("Unexpected error occurred.");
+            }
         } finally {
             setLoading(false);
         }
@@ -51,7 +56,7 @@ function LoginPage () {
                     <Input
                         label="Mobile Number"
                         value={mobileNumber}
-                        onChange={setMobileNumber}
+                        onChange={(e) => setMobileNumber(e.target.value)}
                     />
                 </div>
                 <Button
