@@ -56,7 +56,7 @@ function LoginPage () {
                     <Input
                         label="Mobile Number"
                         value={mobileNumber}
-                        onChange={(e) => setMobileNumber(e.target.value)}
+                        onChange={setMobileNumber}
                     />
                 </div>
                 <Button

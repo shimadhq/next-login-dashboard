@@ -9,6 +9,7 @@ export async function login(mobileNumber: string) {
 
         const userData = response.data;
         localStorage.setItem("userData", JSON.stringify(userData));
+        console.log("👽️ userData", userData);
 
         return userData;
     } catch (error: unknown) {
